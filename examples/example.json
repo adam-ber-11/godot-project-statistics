@@ -1,0 +1,9 @@
+{
+  "project_name": "Test Project",
+  "version": 1.0,
+  "features": [
+    "analysis",
+    "parsing"
+  ],
+  "is_active": true
+}
