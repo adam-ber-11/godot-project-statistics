@@ -16,7 +16,7 @@ The configuration can be modified at `Project Settings > Statistics`.
 
 * `Ignore`: List of paths to ignore. (case-sensitive)
 
-* `Force Include`: List of paths to include regardless of whether the path is found in the `Ignore` list. (case-sensitive)
+* `Include`: List of paths to include regardless of whether the path is found in the `Ignore` list. (case-sensitive)
 
 > Note: matching expressions is possible where "*" matches zero or more arbitrary characters and "?" matches any single character except a period (".")
 
