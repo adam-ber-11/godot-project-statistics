@@ -35,6 +35,18 @@ func get_category(category: Category) -> Array[FileStatistics]:
 	return []
 
 
+func get_file_count_by_file_type(category: Category) -> Dictionary[String, int]:
+	var dict: Dictionary[String, int] = { }
+
+	for file: FileStatistics in get_category(category):
+		if file.file_type in dict:
+			dict[file.file_type] += 1
+		else:
+			dict[file.file_type] = 1
+
+	return dict
+
+
 func get_color_by_file_type(category: Category) -> Dictionary[String, Color]:
 	var dict: Dictionary[String, Color] = { }
 
