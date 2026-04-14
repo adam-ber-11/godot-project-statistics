@@ -22,7 +22,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=440947656]
 layout_mode = 2
 size_flags_horizontal = 2
-text = "Project statistics:"
+text = "Project statistics"
 
 [node name="Button" type="Button" parent="HBoxContainer" unique_id=1723216618]
 layout_mode = 2
