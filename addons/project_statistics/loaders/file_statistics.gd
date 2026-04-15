@@ -1,6 +1,15 @@
 class_name FileStatistics
 extends RefCounted
 
+enum LineType {
+	CODE,
+	BLANK,
+	SINGLE_LINE_COMMENT,
+	COMMENT_START,
+	COMMENT_START_OR_END,
+	COMMENT_END,
+}
+
 var file_path: String = ""
 var file_size: int = 0
 var file_total_lines: int = 0
@@ -40,24 +49,43 @@ func _init(path: String, skip_line_count: bool = false) -> void:
 	if skip_line_count:
 		return
 
+	var in_multi_line_comment: bool = false
+
 	while not file.eof_reached():
 		var line: String = file.get_line()
+		var type_of_line: LineType = get_type_of_line(line)
 		file_total_lines += 1
 
-		if is_comment(line):
-			file_comment_lines += 1
-		elif is_blank(line):
+		if type_of_line == LineType.BLANK:
 			file_blank_lines += 1
+			continue
+
+		if in_multi_line_comment:
+			file_comment_lines += 1
+			if type_of_line == LineType.COMMENT_START_OR_END or type_of_line == LineType.COMMENT_END:
+				in_multi_line_comment = false
+			continue
 		else:
+			if type_of_line == LineType.COMMENT_START_OR_END or type_of_line == LineType.COMMENT_START:
+				file_comment_lines += 1
+				in_multi_line_comment = true
+				continue
+
+		if type_of_line == LineType.SINGLE_LINE_COMMENT:
+			file_comment_lines += 1
+			continue
+
+		if type_of_line == LineType.CODE:
 			file_code_lines += 1
+			continue
+
+		push_error("Unknown return value.")
 
 	file.close()
 
 
-@warning_ignore("unused_parameter")
-func is_comment(line: String) -> bool:
-	return false
+func get_type_of_line(line: String) -> LineType:
+	if line.strip_edges().is_empty():
+		return LineType.BLANK
 
-
-func is_blank(line: String) -> bool:
-	return line.strip_edges().is_empty()
+	return LineType.CODE

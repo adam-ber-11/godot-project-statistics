@@ -46,3 +46,15 @@ func _init(path: String, skip_line_count: bool = false) -> void:
 
 	file_is_script = ClassDB.is_parent_class(file_type, "Script")
 	file_is_resource = true
+
+
+func get_type_of_line(line: String) -> LineType:
+	line = line.strip_edges()
+
+	if line.is_empty():
+		return LineType.BLANK
+
+	if line.begins_with(";"):
+		return LineType.SINGLE_LINE_COMMENT
+
+	return LineType.CODE

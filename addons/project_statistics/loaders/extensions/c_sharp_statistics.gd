@@ -10,9 +10,22 @@ func _init(path: String, skip_line_count: bool = false) -> void:
 	file_is_script = true
 
 
-func is_comment(line: String) -> bool:
+func get_type_of_line(line: String) -> LineType:
 	line = line.strip_edges()
-	return (line.begins_with("//")
-		or line.begins_with("/*")
-		or line.begins_with("*")
-		or line.ends_with("*/") )
+
+	if line.is_empty():
+		return LineType.BLANK
+
+	if line.begins_with("//"):
+		return LineType.SINGLE_LINE_COMMENT
+
+	if line.begins_with("/*") and line.ends_with("*/"):
+		return LineType.SINGLE_LINE_COMMENT
+
+	if line.begins_with("/*"):
+		return LineType.COMMENT_START
+
+	if line.ends_with("*/"):
+		return LineType.COMMENT_END
+
+	return LineType.CODE

@@ -13,3 +13,27 @@ func _init(path: String, skip_line_count: bool = false) -> void:
 func is_comment(line: String) -> bool:
 	# TODO: Detect multi-line comments
 	return line.strip_edges().begins_with("#")
+
+
+func get_type_of_line(line: String) -> LineType:
+	line = line.strip_edges()
+
+	if line.is_empty():
+		return LineType.BLANK
+
+	if line.begins_with("#"):
+		return LineType.SINGLE_LINE_COMMENT
+
+	if line == "\"\"\"":
+		return LineType.COMMENT_START_OR_END
+
+	if line.begins_with("\"\"\"") and line.ends_with("\"\"\"") and line.count("\"") >= 6:
+		return LineType.SINGLE_LINE_COMMENT
+
+	if line.begins_with("\"\"\""):
+		return LineType.COMMENT_START
+
+	if line.ends_with("\"\"\""):
+		return LineType.COMMENT_END
+
+	return LineType.CODE
