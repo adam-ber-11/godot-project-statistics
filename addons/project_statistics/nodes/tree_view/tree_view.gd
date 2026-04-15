@@ -15,6 +15,7 @@ var column_names: Array[TreeViewColumn]:
 var row_files: Array[FileStatistics]:
 	set(new_row_files):
 		row_files = new_row_files
+		_column_sort_index = -1
 
 		if column_names:
 			reload_tree()
