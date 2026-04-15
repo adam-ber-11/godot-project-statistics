@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b35dasgyregmx"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_grmyf"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Sprite3D" type="Sprite3D" unique_id=615924936]
+texture = SubResource("ViewportTexture_grmyf")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=565595047]
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport" unique_id=1930554019]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
