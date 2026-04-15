@@ -149,8 +149,8 @@ func custom_sort(a: FileStatistics, b: FileStatistics, reverse: bool) -> bool:
 
 func _sort_string(a: String, b: String, reverse: bool) -> bool:
 	if reverse:
-		return a.casecmp_to(b) == 1
-	return a.casecmp_to(b) == -1
+		return a.nocasecmp_to(b) == 1
+	return a.nocasecmp_to(b) == -1
 
 
 func _sort_int(a: int, b: int, reverse: bool) -> bool:
