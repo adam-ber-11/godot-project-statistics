@@ -91,12 +91,6 @@ func get_column_text(file: FileStatistics) -> String:
 	return "Error"
 
 
-func custom_sort(a: FileStatistics, b: FileStatistics, reverse: bool) -> bool:
-	if reverse:
-		return not _custom_sort(a, b)
-	return _custom_sort(a, b)
-
-
 func _get_icon(icon_path: String) -> Texture2D:
 	if EditorInterface.get_base_control().has_theme_icon(icon_path, "EditorIcons"):
 		return EditorInterface.get_base_control().get_theme_icon(icon_path, "EditorIcons")
@@ -106,55 +100,60 @@ func _get_icon(icon_path: String) -> Texture2D:
 	return null
 
 
-# TODO: sort by some backup string
-func _custom_sort(a: FileStatistics, b: FileStatistics) -> bool:
+func custom_sort(a: FileStatistics, b: FileStatistics, reverse: bool) -> bool:
 	match type:
 		Type.FILE_PATH:
-			return _sort_string(a.file_path, b.file_path)
+			return _sort_string(a.file_path, b.file_path, reverse)
 		Type.FILE_NAME:
-			return _sort_string(a.file_name, b.file_name)
+			return _sort_string(a.file_name, b.file_name, reverse)
 		Type.FILE_SIZE:
-			return _sort_int(a.file_size, b.file_size)
+			return _sort_int(a.file_size, b.file_size, reverse)
 		Type.FILE_TYPE:
-			return _sort_string(a.file_type, b.file_type)
+			return _sort_string(a.file_type, b.file_type, reverse)
 		Type.FILE_TOTAL_LINES:
-			return _sort_int(a.file_total_lines, b.file_total_lines)
+			return _sort_int(a.file_total_lines, b.file_total_lines, reverse)
 		Type.FILE_CODE_LINES:
-			return _sort_int(a.file_code_lines, b.file_code_lines)
+			return _sort_int(a.file_code_lines, b.file_code_lines, reverse)
 		Type.FILE_COMENT_LINES:
-			return _sort_int(a.file_comment_lines, b.file_comment_lines)
+			return _sort_int(a.file_comment_lines, b.file_comment_lines, reverse)
 		Type.FILE_BLANK_LINES:
-			return _sort_int(a.file_blank_lines, b.file_blank_lines)
+			return _sort_int(a.file_blank_lines, b.file_blank_lines, reverse)
 		Type.FILE_EXTENSION:
-			return _sort_string(a.file_extension, b.file_extension)
+			return _sort_string(a.file_extension, b.file_extension, reverse)
 		Type.FILE_ICON:
-			return _sort_string(a.file_icon, b.file_icon)
+			return _sort_string(a.file_icon, b.file_icon, reverse)
 		Type.FILE_COLOR:
 			return false
 		Type.FILE_IS_SCRIPT:
-			return _sort_string(str(a.file_is_script), str(b.file_is_script))
+			return _sort_string(str(a.file_is_script), str(b.file_is_script), reverse)
 		Type.FILE_IS_SCENE:
-			return _sort_string(str(a.file_is_scene), str(b.file_is_scene))
+			return _sort_string(str(a.file_is_scene), str(b.file_is_scene), reverse)
 		Type.FILE_IS_RESOURCE:
-			return _sort_string(str(a.file_is_resource), str(b.file_is_resource))
+			return _sort_string(str(a.file_is_resource), str(b.file_is_resource), reverse)
 
 	if a is ResourceStatistics and b is ResourceStatistics:
+		@warning_ignore_start("unsafe_property_access", "unsafe_call_argument")
 		match type:
 			Type.SCENE_BASE_NODE_TYPE:
-				return _sort_string(a.scene_base_node_type, b.scene_base_node_type)
+				return _sort_string(a.scene_base_node_type, b.scene_base_node_type, reverse)
 			Type.SCENE_NODE_COUNT:
-				return _sort_int(a.scene_node_count, b.scene_node_count)
+				return _sort_int(a.scene_node_count, b.scene_node_count, reverse)
 			Type.SCENE_NODE_CONNECTION_COUNT:
-				return _sort_int(a.scene_connection_count, b.scene_connection_count)
+				return _sort_int(a.scene_connection_count, b.scene_connection_count, reverse)
 			Type.RESOURCE_LOCAL_TO_SCENE:
-				return _sort_string(str(a.resource_local_to_scene), str(b.resource_local_to_scene))
+				return _sort_string(str(a.resource_local_to_scene), str(b.resource_local_to_scene), reverse)
+		@warning_ignore_restore("unsafe_property_access", "unsafe_call_argument")
 
 	return false
 
 
-func _sort_string(a: String, b: String) -> bool:
+func _sort_string(a: String, b: String, reverse: bool) -> bool:
+	if reverse:
+		return a.casecmp_to(b) == 1
 	return a.casecmp_to(b) == -1
 
 
-func _sort_int(a: int, b: int) -> bool:
+func _sort_int(a: int, b: int, reverse: bool) -> bool:
+	if reverse:
+		return a > b
 	return a < b
