@@ -48,7 +48,6 @@ func _on_refresh_pressed() -> void:
 func _setup() -> void:
 	if not ProjectSettings.has_setting(LOAD_ON_STARTUP_PROPERTY):
 		ProjectSettings.set_setting(LOAD_ON_STARTUP_PROPERTY, true)
-		ProjectSettings.set_initial_value(LOAD_ON_STARTUP_PROPERTY, true)
 		ProjectSettings.add_property_info(
 			{
 				"name"= LOAD_ON_STARTUP_PROPERTY,
@@ -58,7 +57,6 @@ func _setup() -> void:
 
 	if not ProjectSettings.has_setting(IGNORE_PROPERTY):
 		ProjectSettings.set_setting(IGNORE_PROPERTY, default_ignore)
-		ProjectSettings.set_initial_value(IGNORE_PROPERTY, default_ignore)
 		ProjectSettings.add_property_info(
 			{
 				"name"= IGNORE_PROPERTY,
@@ -68,10 +66,13 @@ func _setup() -> void:
 
 	if not ProjectSettings.has_setting(INCLUDE_PROPERTY):
 		ProjectSettings.set_setting(INCLUDE_PROPERTY, PackedStringArray())
-		ProjectSettings.set_initial_value(INCLUDE_PROPERTY, PackedStringArray())
 		ProjectSettings.add_property_info(
 			{
 				"name"= INCLUDE_PROPERTY,
 				"type"= TYPE_PACKED_STRING_ARRAY,
 			},
 		)
+
+	ProjectSettings.set_initial_value(LOAD_ON_STARTUP_PROPERTY, true)
+	ProjectSettings.set_initial_value(IGNORE_PROPERTY, default_ignore)
+	ProjectSettings.set_initial_value(INCLUDE_PROPERTY, PackedStringArray())
