@@ -9,6 +9,11 @@ An addon for [Godot Engine](https://github.com/godotengine/godot/) that adds a U
 * Number and size of resources.
 * Display the size of resources in a pie chart.
 * Exclude files or directories from generating statistics.
+* Sort rows by any column (by pressing its header).
+
+## Instalation
+
+This plugin is available in the [Godot Asset Library](https://godotengine.org/asset-library/asset/5033) and can be downloaded dicectly in the editor.
 
 ## Configuration
 
@@ -32,15 +37,10 @@ The configuration can be modified at `Project Settings > Statistics`.
 
 ![Misc tab](./screenshots/misc_tab.png)
 
-## Known limitations
+## Known limitations and possible improvements
 
-There are some known limitations. For example, GDScript multi-line comments won't be considered as comments.
-
-``` GDScript
-"""
-This will be considered as normal code
-""""
-```
+* It is not possible to change the order of columns in the file table.
+* It might be useful to have option to change what is diaplayed in pie chart (line count, comment line count, file size).
 
 If you find out some other ones feel free to open an issue. All suggestions are welcome.
 
