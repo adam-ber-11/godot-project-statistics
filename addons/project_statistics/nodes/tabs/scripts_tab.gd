@@ -21,10 +21,12 @@ func _ready() -> void:
 	total_scripts = create_tree_item(root, "Total scripts")
 	used_languages = create_tree_item(root, "Used languages")
 	total_lines = create_tree_item(root, "Total lines")
-	total_code_lines = create_tree_item(root, "Total code lines")
-	total_comments_lines = create_tree_item(root, "Total comments lines")
-	total_blank_lines = create_tree_item(root, "Total blank lines")
+	total_code_lines = create_tree_item(total_lines, "Code lines")
+	total_comments_lines = create_tree_item(total_lines, "Comments lines")
+	total_blank_lines = create_tree_item(total_lines, "Blank lines")
 	total_size = create_tree_item(root, "Total size")
+
+	total_lines.collapsed = true
 
 	tree_view.column_names = [
 		TreeViewColumn.new("File name", TreeViewColumn.Type.FILE_NAME),
