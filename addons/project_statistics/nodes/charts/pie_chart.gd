@@ -2,8 +2,6 @@
 class_name PieChart
 extends Control
 
-# TODO: Reverse direction of chart and change start angle
-
 var series: Array[ChartData]
 var total: float
 
@@ -106,14 +104,14 @@ func _draw_filled_arc(
 ) -> void:
 	var points: PackedVector2Array = []
 	points.push_back(center)
-	points.push_back(center + Vector2(sin(start_angle), cos(start_angle)) * radius) # Start point
+	points.push_back(center + Vector2(sin(start_angle), -cos(start_angle)) * radius) # Start point
 
 	var arc_points_count: int = int((end_angle - start_angle) * points_density)
 	var step: float = (end_angle - start_angle) / (arc_points_count + 1)
 
 	for index: int in range(arc_points_count):
 		var point_angle: float = start_angle + index * step
-		points.push_back(center + Vector2(sin(point_angle), cos(point_angle)) * radius)
+		points.push_back(center + Vector2(sin(point_angle), -cos(point_angle)) * radius)
 
-	points.push_back(center + Vector2(sin(end_angle), cos(end_angle)) * radius) # End point
+	points.push_back(center + Vector2(sin(end_angle), -cos(end_angle)) * radius) # End point
 	draw_polygon(points, [color])
