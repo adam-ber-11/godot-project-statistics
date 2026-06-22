@@ -12,7 +12,6 @@ var other_files: TreeItem
 
 
 func init_sub_tree(parent: TreeItem, data: Dictionary[String, int]) -> void:
-	# TODO: Add icons to the children
 	for child: TreeItem in parent.get_children():
 		if child.get_child_count() != 0:
 			push_warning("Item has children which may lead to memory leak")
@@ -22,6 +21,8 @@ func init_sub_tree(parent: TreeItem, data: Dictionary[String, int]) -> void:
 
 	for data_key: String in data.keys():
 		var new_child: TreeItem = parent.create_child()
+		new_child.set_icon_max_width(0, 16)
+		new_child.set_icon(0, _get_icon(data_key))
 		new_child.set_text(0, data_key)
 		new_child.set_text(1, str(data[data_key]))
 
@@ -62,3 +63,27 @@ func update(new_stats: ProjectStatistics) -> void:
 	]
 
 	pie_graph.set_series(graph_data, false)
+
+
+func _get_icon(icon_name: String) -> Texture2D:
+	# HACK: This function is a big workaround
+
+	if EditorInterface.get_base_control().has_theme_icon(icon_name, "EditorIcons"):
+		return EditorInterface.get_base_control().get_theme_icon(icon_name, "EditorIcons")
+
+	var icon_path: String = ""
+
+	match icon_name:
+		"YAMl":
+			icon_path = "uid://b3b4dcp7nls3r"
+		"JSON":
+			icon_path = "uid://ck8etdf6mpwp"
+		"Markdown":
+			icon_path = "uid://bjgn0w383fm4d"
+		"Config File":
+			pass
+
+	if ResourceLoader.exists(icon_path):
+		return ResourceLoader.load(icon_path)
+
+	return null
