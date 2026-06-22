@@ -15,15 +15,20 @@ An addon for [Godot Engine](https://github.com/godotengine/godot/) that adds a U
 
 This plugin is available in the [Godot Asset Library](https://godotengine.org/asset-library/asset/5033) and can be downloaded dicectly in the editor.
 
+It will be also available in the [Godot Asset Store](https://store.godotengine.org/asset/adam-ber-11/godot-project-statistics/) soon.
+
 ## Configuration
 
 The configuration can be modified at `Project Settings > Statistics`.
 
 * `Ignore`: List of paths to ignore. (case-sensitive)
 
+* `Load on Startup`: Changing this option to `false` may improve project loading time (especially for large projects), because addon goes through every file in the project during scanning process.
+
 * `Include`: List of paths to include regardless of whether the path is found in the `Ignore` list. (case-sensitive)
 
-> Note: matching expressions is possible where "*" matches zero or more arbitrary characters and "?" matches any single character except a period (".")
+> [!NOTE]  
+> Natching expressions is possible where "*" matches zero or more arbitrary characters and "?" matches any single character except a period ".".
 
 ## Screenshots
 
