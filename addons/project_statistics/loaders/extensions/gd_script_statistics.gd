@@ -10,11 +10,6 @@ func _init(path: String, skip_line_count: bool = false) -> void:
 	file_is_script = true
 
 
-func is_comment(line: String) -> bool:
-	# TODO: Detect multi-line comments
-	return line.strip_edges().begins_with("#")
-
-
 func get_type_of_line(line: String) -> LineType:
 	line = line.strip_edges()
 
