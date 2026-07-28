@@ -13,9 +13,11 @@ An addon for [Godot Engine](https://github.com/godotengine/godot/) that adds a U
 
 ## Instalation
 
-This plugin is available in the [Godot Asset Library](https://godotengine.org/asset-library/asset/5033) and can be downloaded dicectly in the editor.
+Latest version is available in the [Godot Asset Store](https://store.godotengine.org/asset/adam-ber-11/godot-project-statistics/) and can be downloaded dicectly in the editor.
 
-It will be also available in the [Godot Asset Store](https://store.godotengine.org/asset/adam-ber-11/godot-project-statistics/) soon.
+This plugin is also available in the [Godot Asset Library](https://godotengine.org/asset-library/asset/5033), but there isn't latest version. Therefore for older versions of editor (4.6) it is recommended to download addon as zip from Godot Asset Store or GitHub and copy `addons/project_statistics` folder into `addons` folder inside your project.
+
+Minimum supported Godot version is 4.6.
 
 ## Configuration
 
